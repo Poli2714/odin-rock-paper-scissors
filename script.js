@@ -1,22 +1,21 @@
 'use strict';
 
+const gameContainer = document.querySelector('.game-container');
+const currentScore = document.querySelector('.current-score');
+const currentChoices = document.querySelector('.current-choices');
+const currentResult = document.querySelector('.current-result');
+const choiceImgs = document.querySelectorAll('.choice-img');
+const resetBtn = document.querySelector('.reset-btn');
+const newBtn = document.querySelector('.new-btn');
+let playerScore = 0;
+let compScore = 0;
+let isPlayable = true;
+
 const CHOICES = ['Rock', 'Paper', 'Scissors'];
 
 const getComputerChoice = function () {
   const i = Math.trunc(Math.random() * CHOICES.length);
   return CHOICES[i];
-};
-
-const getPlayerChoice = function () {
-  let playerSelection = '';
-
-  do {
-    playerSelection = prompt('Choose between "Rock", "Paper" and "Scissors": ');
-    playerSelection =
-      playerSelection[0].toUpperCase() + playerSelection.slice(1).toLowerCase();
-  } while (!CHOICES.includes(playerSelection));
-
-  return playerSelection;
 };
 
 const playRound = function (playerSelection, computerSelection) {
@@ -40,10 +39,33 @@ const playRound = function (playerSelection, computerSelection) {
   }
 };
 
-const play = function (playRound, n) {
-  for (let i = 0; i < n; i++) {
-    console.log(playRound(getPlayerChoice(), getComputerChoice()));
-  }
-};
+gameContainer.addEventListener('click', function (e) {
+  if (isPlayable) {
+    const target = e.target;
+    if (target.localName !== 'img') return;
 
-// play(playRound, 5);
+    resetBtn.classList.remove('hidden');
+    currentChoices.innerHTML = '';
+    const playerSelection = target.alt;
+    const computerSelection = getComputerChoice();
+    currentChoices.insertAdjacentHTML(
+      'afterbegin',
+      `<img src="./images/${playerSelection.toLowerCase()}.png" alt="${playerSelection}" width="50">
+      <span>vs</span>
+      <img src="./images/${computerSelection.toLowerCase()}.png" alt="${computerSelection}" width="50">`
+    );
+    currentResult.textContent = playRound(playerSelection, computerSelection);
+    if (currentResult.textContent.includes('You win!')) playerScore++;
+    else if (currentResult.textContent.includes('You lose!')) compScore++;
+
+    currentScore.textContent = `${playerScore} - ${compScore}`;
+    if (playerScore === 5 || compScore === 5) {
+      currentResult.textContent = `You ${
+        playerScore === 5 ? 'win! Congratulations!' : 'lost. Please try again!'
+      }`;
+      isPlayable = false;
+      resetBtn.classList.toggle('hidden');
+      newBtn.classList.toggle('hidden');
+    }
+  }
+});
