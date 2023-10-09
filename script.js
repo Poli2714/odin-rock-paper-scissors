@@ -69,3 +69,11 @@ gameContainer.addEventListener('click', function (e) {
     }
   }
 });
+
+resetBtn.addEventListener('click', function () {
+  resetBtn.classList.toggle('hidden');
+  currentScore.textContent = '';
+  currentChoices.innerHTML = '';
+  currentResult.textContent = '';
+  playerScore = compScore = 0;
+});
