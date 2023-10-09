@@ -77,3 +77,12 @@ resetBtn.addEventListener('click', function () {
   currentResult.textContent = '';
   playerScore = compScore = 0;
 });
+
+newBtn.addEventListener('click', function () {
+  isPlayable = true;
+  newBtn.classList.toggle('hidden');
+  currentScore.textContent = '';
+  currentChoices.innerHTML = '';
+  currentResult.textContent = '';
+  playerScore = compScore = 0;
+});
