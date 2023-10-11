@@ -1,0 +1,116 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: #eccaff;
+
+  font-family: 'Dela Gothic One', sans-serif;
+  font-size: 16px;
+}
+
+.header {
+  margin: 2rem 0 5rem;
+  text-align: center;
+  width: 100%;
+}
+
+.container {
+  width: 100%;
+}
+
+.game-container {
+  border: 1px solid black;
+
+  display: flex;
+  gap: 2rem;
+
+  margin: auto;
+  max-width: 80rem;
+}
+
+.left-col,
+.right-col {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+
+  flex: 1;
+  gap: 6rem;
+  text-align: center;
+  width: 33%;
+}
+
+.score-div {
+  color: #d1105a;
+  font-size: 3rem;
+  margin-top: 3rem;
+}
+
+.player-choice,
+.comp-choice {
+  height: 200px;
+  margin-bottom: 3rem;
+  width: 200px;
+  background-color: white;
+}
+
+.middle-col {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 4rem;
+  justify-content: center;
+
+  flex: 1;
+  text-align: center;
+  width: 34%;
+}
+
+h2 {
+  font-size: 2rem;
+  font-style: italic;
+  font-weight: 400;
+}
+
+.btn-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+button {
+  background-color: inherit;
+  border: none;
+}
+
+.btn,
+.choice-img {
+  transition: transform 0.2s ease-in;
+}
+
+.choice-img:hover {
+  cursor: pointer;
+  transform: scale(1.1);
+}
+
+.btn {
+  background-color: orangered;
+  border-radius: 10px;
+  color: white;
+  font-family: inherit;
+  font-size: 1.1rem;
+  padding: 1rem 2.5rem;
+}
+
+.btn:hover {
+  cursor: pointer;
+  transform: scale(1.05);
+}
+
+.hidden {
+  display: none;
+}
