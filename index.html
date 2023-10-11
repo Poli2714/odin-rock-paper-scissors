@@ -5,51 +5,73 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Rock Paper Scissors</title>
     <link rel="stylesheet" href="./style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&display=swap"
+      rel="stylesheet"
+    />
     <script src="./script.js" defer></script>
   </head>
   <body>
-    <header>
+    <header class="header">
       <img
         src="./images/rock-paper-scissors.png"
         alt="Rock Paper Scissors image"
-        width="100"
+        width="150"
       />
-      <h1>Rock-Paper-Scissors Game</h1>
     </header>
-    <section class="game-container">
-      <h2>Make a selection to start the game</h2>
-      <p class="current-score"></p>
-      <div class="current-choices"></div>
-      <p class="current-result"></p>
-      <div class="btn-container">
-        <button class="btn select-btn">
-          <img
-            class="choice-img"
-            src="./images/rock.png"
-            alt="Rock"
-            width="100"
-          />
-        </button>
-        <button class="btn select-btn">
-          <img
-            class="choice-img"
-            src="./images/paper.png"
-            alt="Paper"
-            width="100"
-          />
-        </button>
-        <button class="btn select-btn">
-          <img
-            class="choice-img"
-            src="./images/scissors.png"
-            alt="Scissors"
-            width="100"
-          />
-        </button>
-      </div>
-      <div class="reset-game">
-        <button class="btn reset-btn hidden">Reset Game</button>
-        <button class="btn new-btn hidden">New Game</button>
+    <section class="container">
+      <div class="game-container">
+        <div class="left-col">
+          <div class="score-div">
+            <p>Player</p>
+            <span class="player-score">0</span>
+          </div>
+          <p class="result-message player-result"></p>
+          <div class="player-choice"></div>
+        </div>
+        <div class="middle-col">
+          <h2>Make a selection</h2>
+          <div class="btn-container">
+            <button class="select-btn">
+              <img
+                class="choice-img"
+                src="./images/rock.png"
+                alt="Rock"
+                width="80"
+              />
+            </button>
+            <button class="select-btn">
+              <img
+                class="choice-img"
+                src="./images/paper.png"
+                alt="Paper"
+                width="80"
+              />
+            </button>
+            <button class="select-btn">
+              <img
+                class="choice-img"
+                src="./images/scissors.png"
+                alt="Scissors"
+                width="80"
+              />
+            </button>
+          </div>
+          <div class="reset-game">
+            <button class="btn reset-btn hidden">Reset Game</button>
+            <button class="btn new-btn hidden">New Game</button>
+          </div>
+        </div>
+        <div class="right-col">
+          <div class="score-div">
+            <p>Computer</p>
+            <span class="comp-score">0</span>
+          </div>
+          <p class="result-message comp-result"></p>
+          <div class="comp-choice"></div>
+        </div>
       </div>
     </section>
   </body>
