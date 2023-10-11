@@ -5,14 +5,26 @@
 }
 
 body {
-  background-color: #eccaff;
+  /* background-color: #eccaff; */
+  background: #ffafbd; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to right,
+    #ffc3a0,
+    #ffafbd
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to right,
+    #ffc3a0,
+    #ffafbd
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 
   font-family: 'Dela Gothic One', sans-serif;
   font-size: 16px;
+  height: 100vh;
 }
 
 .header {
-  margin: 2rem 0 5rem;
+  padding: 2rem 0 5rem;
   text-align: center;
   width: 100%;
 }
@@ -22,8 +34,11 @@ body {
 }
 
 .game-container {
-  border: 1px solid black;
+  background-color: rgb(255, 229, 229);
 
+  border-radius: 25px;
+  box-shadow: 25px 25px 60px -30px rgb(102, 99, 112);
+  color: #d1105a;
   display: flex;
   gap: 2rem;
 
@@ -44,7 +59,6 @@ body {
 }
 
 .score-div {
-  color: #d1105a;
   font-size: 3rem;
   margin-top: 3rem;
 }
@@ -89,7 +103,7 @@ button {
 
 .btn,
 .choice-img {
-  transition: transform 0.2s ease-in;
+  transition: transform 0.3s ease-out;
 }
 
 .choice-img:hover {
@@ -98,7 +112,7 @@ button {
 }
 
 .btn {
-  background-color: orangered;
+  background-color: #d1105a;
   border-radius: 10px;
   color: white;
   font-family: inherit;
