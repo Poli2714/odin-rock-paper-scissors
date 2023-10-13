@@ -46,11 +46,16 @@ body {
   max-width: 80rem;
 }
 
+.left-col {
+  color: #2b9348;
+}
+
 .left-col,
 .right-col {
   display: flex;
   align-items: center;
   flex-direction: column;
+  justify-content: space-between;
 
   flex: 1;
   gap: 6rem;
@@ -63,12 +68,49 @@ body {
   margin-top: 3rem;
 }
 
+.player-score,
+.comp-score {
+  font-size: 5rem;
+}
+
+.round-status {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  height: 18.4rem;
+}
+
+.result-message {
+  font-size: 2.5rem;
+}
+
+.result-msg-desc {
+  font-size: 1.5rem;
+}
+
 .player-choice,
 .comp-choice {
-  height: 200px;
-  margin-bottom: 3rem;
-  width: 200px;
-  background-color: white;
+  margin: 1rem 0 3rem;
+}
+
+.rps-div,
+.player-choice,
+.comp-choice {
+  background-color: #023047;
+  border: 10px solid #3fc1c0;
+  box-sizing: unset;
+  border-radius: 50%;
+  padding: 0.5rem;
+  height: 100px;
+  width: 100px;
+}
+
+.player-choice {
+  border-color: #2b9348;
+}
+
+.comp-choice {
+  border-color: #d1105a;
 }
 
 .middle-col {
@@ -76,43 +118,44 @@ body {
   align-items: center;
   flex-direction: column;
   gap: 4rem;
-  justify-content: center;
 
   flex: 1;
+  padding: 2rem 0;
   text-align: center;
   width: 34%;
 }
 
 h2 {
+  color: #023047;
   font-size: 2rem;
   font-style: italic;
   font-weight: 400;
 }
 
-.btn-container {
+.rps-container {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1rem;
-}
-
-button {
-  background-color: inherit;
-  border: none;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  justify-content: center;
 }
 
 .btn,
-.choice-img {
+.rps-div {
   transition: transform 0.3s ease-out;
 }
 
-.choice-img:hover {
+.rps-div:hover {
   cursor: pointer;
-  transform: scale(1.1);
+  transform: scale(0.9);
+}
+
+.reset-game {
+  height: 70px;
 }
 
 .btn {
-  background-color: #d1105a;
+  background-color: #3fc1c0;
+  border: none;
   border-radius: 10px;
   color: white;
   font-family: inherit;
