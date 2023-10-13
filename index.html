@@ -28,36 +28,28 @@
             <p>Player</p>
             <span class="player-score">0</span>
           </div>
-          <p class="result-message player-result"></p>
-          <div class="player-choice"></div>
+          <div class="round-status">
+            <p class="result-message"></p>
+            <p class="result-msg-desc"></p>
+            <div class="player-choice choice hidden"></div>
+          </div>
         </div>
         <div class="middle-col">
           <h2>Make a selection</h2>
-          <div class="btn-container">
-            <button class="select-btn">
-              <img
-                class="choice-img"
-                src="./images/rock.png"
-                alt="Rock"
-                width="80"
-              />
-            </button>
-            <button class="select-btn">
-              <img
-                class="choice-img"
-                src="./images/paper.png"
-                alt="Paper"
-                width="80"
-              />
-            </button>
-            <button class="select-btn">
+          <div class="rps-container">
+            <div class="rps-div">
+              <img class="choice-img" src="./images/rock.png" alt="Rock" />
+            </div>
+            <div class="rps-div">
+              <img class="choice-img" src="./images/paper.png" alt="Paper" />
+            </div>
+            <div class="rps-div">
               <img
                 class="choice-img"
                 src="./images/scissors.png"
                 alt="Scissors"
-                width="80"
               />
-            </button>
+            </div>
           </div>
           <div class="reset-game">
             <button class="btn reset-btn hidden">Reset Game</button>
@@ -69,8 +61,7 @@
             <p>Computer</p>
             <span class="comp-score">0</span>
           </div>
-          <p class="result-message comp-result"></p>
-          <div class="comp-choice"></div>
+          <div class="comp-choice choice hidden"></div>
         </div>
       </div>
     </section>
