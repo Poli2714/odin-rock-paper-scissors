@@ -1,88 +1,110 @@
 'use strict';
 
 const gameContainer = document.querySelector('.game-container');
-const currentScore = document.querySelector('.current-score');
-const currentChoices = document.querySelector('.current-choices');
-const currentResult = document.querySelector('.current-result');
-const choiceImgs = document.querySelectorAll('.choice-img');
+const playerScore = document.querySelector('.player-score');
+const resultMessage = document.querySelector('.result-message');
+const resultMsgDesc = document.querySelector('.result-msg-desc');
+const playerChoice = document.querySelector('.player-choice');
+const choices = document.querySelectorAll('.choice');
+const resetGameContainer = document.querySelector('.reset-game');
 const resetBtn = document.querySelector('.reset-btn');
 const newBtn = document.querySelector('.new-btn');
-let playerScore = 0;
-let compScore = 0;
+const compScore = document.querySelector('.comp-score');
+const compChoice = document.querySelector('.comp-choice');
+
+let scores = [0, 0];
 let isPlayable = true;
 
 const CHOICES = ['Rock', 'Paper', 'Scissors'];
+
+const renderOnStart = function () {
+  resetBtn.classList.remove('hidden');
+  playerChoice.classList.remove('hidden');
+  compChoice.classList.remove('hidden');
+  playerChoice.innerHTML = '';
+  compChoice.innerHTML = '';
+};
 
 const getComputerChoice = function () {
   const i = Math.trunc(Math.random() * CHOICES.length);
   return CHOICES[i];
 };
 
+const displayChoices = function (plSelection, compSelection) {
+  playerChoice.insertAdjacentHTML(
+    'afterbegin',
+    `<img src="./images/${plSelection.toLowerCase()}.png" alt="${plSelection}">`
+  );
+  compChoice.insertAdjacentHTML(
+    'afterbegin',
+    `<img src="./images/${compSelection.toLowerCase()}.png" alt="${compSelection}">`
+  );
+};
+
 const playRound = function (playerSelection, computerSelection) {
-  if (playerSelection === computerSelection) return 'Tie!';
+  if (playerSelection === computerSelection) return 'TIE!';
   if (playerSelection === 'Rock') {
-    return `You ${computerSelection === 'Scissors' ? 'win' : 'lose'}! ${
-      computerSelection === 'Scissors'
-        ? 'Rock beats Scissors'
-        : 'Paper beats Rock'
-    }`;
+    return `YOU ${computerSelection === 'Scissors' ? 'WIN' : 'LOSE'}!`;
   } else if (playerSelection === 'Paper') {
-    return `You ${computerSelection === 'Rock' ? 'win' : 'lose'}! ${
-      computerSelection === 'Rock' ? 'Paper beats Rock' : 'Scissors beat Paper'
-    }`;
+    return `YOU ${computerSelection === 'Rock' ? 'WIN' : 'LOSE'}!`;
   } else {
-    return `You ${computerSelection === 'Paper' ? 'win' : 'lose'}! ${
-      computerSelection === 'Paper'
-        ? 'Scissors beat Paper'
-        : 'Rock beats Scissors'
-    }`;
+    return `YOU ${computerSelection === 'Paper' ? 'WIN' : 'LOSE'}!`;
   }
+};
+
+const displayRoundResult = function (plSelection, compSelection, arr) {
+  if (resultMessage.textContent === 'YOU WIN!') {
+    resultMsgDesc.textContent = `${plSelection} beats ${compSelection}`;
+    playerScore.textContent = ++arr[0];
+  } else if (resultMessage.textContent === 'YOU LOSE!') {
+    resultMsgDesc.textContent = `${compSelection} beats ${plSelection}`;
+    compScore.textContent = ++arr[1];
+  } else resultMsgDesc.textContent = '';
+};
+
+const displayGameResult = function (arr) {
+  if (arr.includes(5)) {
+    resultMessage.textContent = `You ${
+      playerScore.textContent === '5' ? 'won' : 'lost'
+    } the game!`;
+    resultMsgDesc.textContent = '';
+    isPlayable = false;
+    resetBtn.classList.toggle('hidden');
+    newBtn.classList.toggle('hidden');
+  }
+};
+
+const resetGame = function (scores) {
+  playerChoice.classList.add('hidden');
+  compChoice.classList.add('hidden');
+  playerScore.textContent = compScore.textContent = '0';
+  scores = [0, 0];
+  resultMessage.textContent = '';
+  resultMsgDesc.textContent = '';
 };
 
 gameContainer.addEventListener('click', function (e) {
   if (isPlayable) {
     const target = e.target;
-    if (target.localName !== 'img') return;
+    if (target?.localName !== 'img') return;
+    renderOnStart();
 
-    resetBtn.classList.remove('hidden');
-    currentChoices.innerHTML = '';
     const playerSelection = target.alt;
     const computerSelection = getComputerChoice();
-    currentChoices.insertAdjacentHTML(
-      'afterbegin',
-      `<img src="./images/${playerSelection.toLowerCase()}.png" alt="${playerSelection}" width="50">
-      <span>vs</span>
-      <img src="./images/${computerSelection.toLowerCase()}.png" alt="${computerSelection}" width="50">`
-    );
-    currentResult.textContent = playRound(playerSelection, computerSelection);
-    if (currentResult.textContent.includes('You win!')) playerScore++;
-    else if (currentResult.textContent.includes('You lose!')) compScore++;
 
-    currentScore.textContent = `${playerScore} - ${compScore}`;
-    if (playerScore === 5 || compScore === 5) {
-      currentResult.textContent = `You ${
-        playerScore === 5 ? 'win! Congratulations!' : 'lost. Please try again!'
-      }`;
-      isPlayable = false;
-      resetBtn.classList.toggle('hidden');
-      newBtn.classList.toggle('hidden');
-    }
+    displayChoices(playerSelection, computerSelection);
+    resultMessage.textContent = playRound(playerSelection, computerSelection);
+    displayRoundResult(playerSelection, computerSelection, scores);
+    displayGameResult(scores);
   }
 });
 
-resetBtn.addEventListener('click', function () {
-  resetBtn.classList.toggle('hidden');
-  currentScore.textContent = '';
-  currentChoices.innerHTML = '';
-  currentResult.textContent = '';
-  playerScore = compScore = 0;
-});
-
-newBtn.addEventListener('click', function () {
-  isPlayable = true;
-  newBtn.classList.toggle('hidden');
-  currentScore.textContent = '';
-  currentChoices.innerHTML = '';
-  currentResult.textContent = '';
-  playerScore = compScore = 0;
+resetGameContainer.addEventListener('click', function (e) {
+  const target = e.target;
+  if (!target.classList.contains('btn')) return;
+  if (target.classList.contains('new-btn')) {
+    isPlayable = true;
+    newBtn.classList.toggle('hidden');
+  } else resetBtn.classList.toggle('hidden');
+  resetGame(scores);
 });
